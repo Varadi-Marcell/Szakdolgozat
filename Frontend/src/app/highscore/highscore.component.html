@@ -1,0 +1,20 @@
+<div class="container mt-4">
+  <div class="table-responsive-md">
+    <table class="table">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Játékos</th>
+        <th scope="col">Pontszám</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of users; let i = index;" [ngClass]="user.username === winner ? 'bg-success' : ''">
+        <td>{{i+1}}</td>
+        <td>{{user.username}}</td>
+        <td>{{user.points}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,112 @@
+
+
+<div class="container-fluid" id="drawContainer">
+    <div class="row bg-secondary bg-gradient bg-opacity-75">
+
+      <div class="col-3">
+        <h3 class="display-5 fw-bold mb-5 mx-1 mx-md-4 mt-4 float-sm-start ">{{description}}</h3>
+      </div>
+      <div class="col-6">
+        <span class="display-5 fw-bold mb-5 mx-1 mx-md-4 mt-4 float-sm-start "  *ngFor="let number of lengthOfTheWords; let i = index;">_</span>
+      </div>
+      <div class="col-6">
+      </div>
+
+    </div>
+    <div class="row bg-secondary">
+      <div class="col-2">
+        <h1 class="bi bi-alarm">{{timeLeft}}</h1>
+      </div>
+      <div class="col-10">
+
+      </div>
+
+    </div>
+
+  <div class="flex-line">
+    <div class="nav">
+      <form class="form-inline">
+        <div class="form-group">
+
+          <button id="disconnect" class="btn btn-default btn-danger w-50 p-3" type="submit" (click)="disconnect()">Kilépés a játékból</button>
+          <button type="button" [disabled]="clicked" (click)="startGame();" class="btn btn-primary w-50 p-3">Játék Indítása</button>
+        </div>
+      </form>
+
+      <form class="form-inline" style="margin-top: 20px;">
+        <div class="form-group">
+          <label for="name">Tippek:</label>
+          <input type="text" id="name" name="name" class="form-control" [(ngModel)]="name"/>
+        </div>
+        <button id="send" class="btn btn-default" type="button" *ngIf="user" (click)="sendHint()">Küldés</button>
+      </form>
+      <table id="conversation" class="table table-striped" style="margin-top: 20px;">
+        <thead>
+        <tr>
+          <th>Tippek:</th>
+        </tr>
+        </thead>
+        <div class=" overflow-auto hints">
+          <div  *ngFor="let greeting of hintsArray">
+            <p>{{greeting}}</p>
+          </div>
+          <div class="row d-flex flex-wrap justify-content-center align-content-center me-0">
+            <div class="col-10 text-center" *ngFor="let word of words">
+              <button class="btn btn-outline-dark" (click)="selectWord(word)">{{word}}</button>
+            </div>
+          </div>
+        </div>
+
+      </table>
+    </div>
+
+    <div class="content">
+      <app-canvas #canvasComponent
+                  class="offcanvas-end"
+                  [width]="1200"
+                  [height]="600"
+                  [color]="selectedColor"
+                  (sendCoordinatesEvent)="sendCoordinates($event)"
+      >
+      </app-canvas>
+
+      <div id="cucc">
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th scope="col"><h2>Játékosok</h2></th>
+            <th scope="col"><h2>Pontok</h2></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let u of users; index as i">
+            <th>
+              <div  class="display-6">
+                <i class="bi bi-person">#{{i+1}} {{u.username}}</i>
+              </div>
+            </th>
+            <th>
+              <div  class="display-6">
+                <h2>{{u.points}}</h2>
+              </div>
+            </th>
+
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="color col-1 rounded-3" *ngFor="let c of colors" (click)="setColor(c)" [ngStyle]="{'background-color': c}">
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+</div>
