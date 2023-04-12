@@ -1,4 +1,4 @@
 # Szakdolgozat
-Frontend elindítása: cd frontend npm i && ng serve   
+Frontend elindítása: cd Frontend npm i && ng serve   
 
-backendet külön kell megnyitni és elindítani
+Backend elindítása: cd Backend  mvn clean  mvn install  mvn package  mvn spring-boot:run
